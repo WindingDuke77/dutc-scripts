@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DUTC Script Tags</title>
+<meta name="description" content="Every LCD tag, block keyword and toolbar argument for the DUTC Space Engineers scripts on one page: Power Deck, Solar Tracker, Build & Repair and Inventory Manager.">
+<meta property="og:title" content="DUTC Script Tags">
+<meta property="og:description" content="Every LCD tag, block keyword and toolbar argument for the DUTC Space Engineers scripts on one page.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#080A10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121620'/%3E%3Cg fill='%23FFBE3C' transform='skewX(-24) translate(10 0)'%3E%3Crect x='4' y='8' width='4' height='16'/%3E%3Crect x='11' y='8' width='4' height='16'/%3E%3Crect x='18' y='8' width='4' height='16'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080A10;
+  --panel: #121620;
+  --panel-2: #0E121A;
+  --line: #232A38;
+  --frame: #5F697D;
+  --text: #D2DCEB;
+  --dim: #8B95A9;
+  --amber: #FFBE3C;
+  --green: #50DC78;
+  --blue: #78A0FF;
+  --orange: #FF8A3D;
+  --acc: var(--amber);
+  --radius: 10px;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  margin: 0;
+  background:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px) 0 0 / 32px 32px,
+    var(--bg);
+  color: var(--text);
+  font: 400 16px/1.55 Barlow, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--acc); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+code, .mono { font-family: var(--mono); font-size: .88em; }
+code { background: var(--panel); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; color: var(--text); white-space: nowrap; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* hazard stripes, same as the in-game screen header */
+.haz { display: inline-flex; gap: 5px; vertical-align: middle; }
+.haz i { width: 6px; height: 20px; background: var(--acc); transform: skewX(-26deg); }
+
+/* ---------- hero ---------- */
+header.hero { padding: 56px 0 28px; }
+.brand { display: flex; align-items: center; gap: 14px; font: 700 15px/1 var(--mono); letter-spacing: .22em; color: var(--text); }
+.brand .sub { color: var(--dim); }
+h1 { font: 700 clamp(44px, 8vw, 84px)/.95 var(--cond); letter-spacing: .01em; margin: 26px 0 14px; text-transform: uppercase; }
+h1 span { color: var(--amber); }
+.lead { font-size: 19px; color: var(--dim); max-width: 640px; margin: 0; }
+.lead b { color: var(--text); font-weight: 500; }
+
+/* ---------- sticky search + jump bar ---------- */
+.bar { position: sticky; top: 0; z-index: 20; background: rgba(8,10,16,.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; gap: 12px; align-items: center; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+.search { position: relative; flex: 1 1 300px; }
+.search input {
+  width: 100%; height: 44px; padding: 0 14px 0 42px;
+  background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 8px;
+  font: 500 16px Barlow, sans-serif; outline: none;
+}
+.search input::placeholder { color: #6E788C; }
+.search input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(255,190,60,.18); }
+.search svg { position: absolute; left: 14px; top: 13px; width: 18px; height: 18px; stroke: var(--dim); }
+.jump { display: flex; gap: 8px; flex-wrap: wrap; }
+.jump a {
+  --acc: var(--c);
+  display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--panel);
+  color: var(--text); text-decoration: none; font: 600 15px Barlow, sans-serif; white-space: nowrap;
+}
+.jump a::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--c); }
+.jump a:hover, .jump a:focus-visible { border-color: var(--c); outline: none; }
+
+/* ---------- basics ---------- */
+.basics { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 34px 0 10px; }
+.basic { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 18px 16px; }
+.basic h3 { margin: 0 0 6px; font: 700 20px/1.1 var(--cond); text-transform: uppercase; letter-spacing: .03em; }
+.basic p { margin: 0; color: var(--dim); font-size: 15px; }
+.basic p code { color: var(--text); }
+
+/* ---------- script sections ---------- */
+section.script { margin: 46px 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel-2); overflow: hidden; }
+.head { display: flex; align-items: center; gap: 18px; padding: 18px 22px; background: var(--panel); border-bottom: 3px solid var(--acc); }
+.head h2 { margin: 0; font: 700 30px/1 var(--cond); text-transform: uppercase; letter-spacing: .03em; flex: 1; }
+.head .links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.head .links a {
+  font: 600 14px Barlow, sans-serif; text-decoration: none; color: var(--text);
+  padding: 7px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--panel-2); white-space: nowrap;
+}
+.head .links a:hover, .head .links a:focus-visible { border-color: var(--acc); color: var(--acc); outline: none; }
+.intro { padding: 18px 22px 4px; color: var(--dim); margin: 0; max-width: 820px; }
+.intro b { color: var(--text); font-weight: 500; }
+
+.group { padding: 10px 22px 18px; }
+.group h3 {
+  margin: 14px 0 8px; font: 700 14px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--acc);
+  display: flex; align-items: center; gap: 12px;
+}
+.group h3::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.group .note { margin: 4px 0 10px; color: var(--dim); font-size: 15px; }
+
+.row {
+  display: grid; grid-template-columns: 190px 1fr auto; gap: 18px; align-items: center;
+  padding: 10px 12px; border-radius: 8px;
+}
+.row:nth-child(even of .row) { background: var(--panel); }
+.row .what { color: var(--dim); font-size: 15.5px; }
+.row .what b { color: var(--text); font-weight: 600; }
+.row .what code { font-size: .84em; }
+
+.tag {
+  justify-self: start; display: inline-flex; align-items: center; gap: 8px;
+  font: 700 15px/1.2 var(--mono); color: var(--acc); background: rgba(255,255,255,.03);
+  border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; cursor: pointer; text-align: left;
+  transition: border-color .15s, background .15s;
+}
+.tag:hover, .tag:focus-visible { border-color: var(--acc); background: rgba(255,255,255,.06); outline: none; }
+.tag svg { width: 13px; height: 13px; stroke: var(--dim); flex: none; opacity: 0; transition: opacity .15s; }
+.tag:hover svg, .tag:focus-visible svg { opacity: 1; }
+.tag.alt { color: var(--text); }
+
+.shot { display: block; width: 92px; height: 92px; border-radius: 6px; border: 1px solid var(--line); overflow: hidden; background: var(--bg); cursor: zoom-in; padding: 0; }
+.shot img { width: 100%; height: 100%; display: block; image-rendering: auto; }
+.shot:hover, .shot:focus-visible { border-color: var(--acc); outline: none; }
+
+.syntax { margin: 6px 0 4px; display: grid; gap: 6px; }
+.syntax div { display: grid; grid-template-columns: 190px 1fr; gap: 18px; padding: 6px 12px; color: var(--dim); font-size: 15px; }
+.syntax div code { justify-self: start; color: var(--acc); }
+
+.empty { display: none; text-align: center; color: var(--dim); padding: 60px 0; font-size: 18px; }
+.hide { display: none !important; }
+mark { background: rgba(255,190,60,.28); color: inherit; border-radius: 3px; padding: 0 1px; }
+
+footer { border-top: 1px solid var(--line); margin-top: 60px; padding: 28px 0 48px; color: var(--dim); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer a { color: var(--text); }
+
+/* lightbox */
+dialog { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); padding: 14px; color: var(--text); max-width: min(560px, 94vw); }
+dialog::backdrop { background: rgba(4,5,8,.82); }
+dialog img { display: block; width: 100%; height: auto; border-radius: 6px; }
+dialog p { margin: 10px 2px 0; font: 600 14px var(--mono); color: var(--dim); }
+
+.toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  background: var(--panel); border: 1px solid var(--amber); color: var(--text); padding: 10px 16px; border-radius: 8px;
+  font: 600 14px var(--mono); transition: opacity .18s, transform .18s; z-index: 50;
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 720px) {
+  header.hero { padding-top: 36px; }
+  .head { flex-wrap: wrap; padding: 16px; }
+  .head .links { justify-content: flex-start; width: 100%; }
+  .intro, .group { padding-left: 14px; padding-right: 14px; }
+  .row { grid-template-columns: 1fr auto; gap: 8px 12px; padding: 12px 10px; }
+  .row .tag { grid-column: 1; }
+  .row .what { grid-column: 1; }
+  .row .shot { grid-column: 2; grid-row: 1 / span 2; width: 72px; height: 72px; }
+  .syntax div { grid-template-columns: 1fr; gap: 4px; }
+  html { scroll-padding-top: 120px; }
+  .bar .wrap { gap: 8px; padding-top: 10px; padding-bottom: 10px; }
+  .jump { width: 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .jump::-webkit-scrollbar { display: none; }
+  .jump a { height: 36px; padding: 0 12px; font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .toast, .tag, .tag svg { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand"><span>DUTC</span><span class="haz" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="sub">SCRIPT GUIDE</span></div>
+    <h1>Every tag, <span>one page</span></h1>
+    <p class="lead">LCD tags, block keywords and toolbar arguments for all four <b>DUTC</b> Space Engineers scripts. Search for anything, click a tag to copy it, click a preview to see the screen it makes.</p>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search, e.g. drain, cockpit, off" autocomplete="off" aria-label="Search tags and arguments">
+    </label>
+    <nav class="jump" aria-label="Scripts">
+      <a href="#power" style="--c: var(--amber)">Power Deck</a>
+      <a href="#solar" style="--c: var(--orange)">Solar Tracker</a>
+      <a href="#bar" style="--c: var(--green)">Build &amp; Repair</a>
+      <a href="#inventory" style="--c: var(--blue)">Inventory</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <div class="basics" id="basics">
+    <div class="basic">
+      <h3>Put it in the name</h3>
+      <p>A tag goes anywhere in a block's name: <code>LCD Panel [BATT]</code>, <code>Corner LCD DUTC-warn</code>. One block can carry several tags.</p>
+    </div>
+    <div class="basic">
+      <h3>Cockpit screens</h3>
+      <p>Blocks with several screens take a number, counting from 0: <code>Cockpit [POWER:1]</code> is the second screen. <code>[BATT:0] [DRAIN:1]</code> puts two views on one cockpit.</p>
+    </div>
+    <div class="basic">
+      <h3>Brackets or not</h3>
+      <p>Power Deck, Solar Tracker and Build &amp; Repair use square brackets. Inventory Manager tags have none, like <code>DUTC-main</code>, so old Isy's setups keep working.</p>
+    </div>
+    <div class="basic">
+      <h3>One PB each</h3>
+      <p>Every script runs on its own programmable block and starts by itself. Arguments go in the PB's Run box or a toolbar slot.</p>
+    </div>
+  </div>
+
+  <!-- ================= POWER DECK ================= -->
+  <section class="script" id="power" style="--acc: var(--amber)">
+    <div class="head">
+      <span class="haz" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <h2>Dutc Power Deck</h2>
+      <div class="links"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3789962197">Workshop</a></div>
+    </div>
+    <p class="intro">Battery manager: turns <b>hydrogen engines and reactors on</b> when batteries run low and <b>off</b> again when they're full, plus power and gas screens.</p>
+
+    <div class="group">
+      <h3>Screens</h3>
+      <div class="row"><button class="tag" data-copy="[BATT]">[BATT]</button><div class="what"><b>Battery status.</b> Charge %, charging or draining rate, time to full or empty, backup state. The PB's own screen shows this too.</div><button class="shot" data-img="img/power-batt.png" aria-label="Preview of the [BATT] screen"><img src="img/power-batt.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[POWER]">[POWER]</button><div class="what"><b>Power producers.</b> Every producer with an on/off dot and live output. With Solar Tracker running too, each tracked array is one row.</div><button class="shot" data-img="img/power-power.png" aria-label="Preview of the [POWER] screen"><img src="img/power-power.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[DRAIN]">[DRAIN]</button><div class="what"><b>Power usage.</b> Everything drawing power, biggest first, so you know what to switch off. <code>DRAIN_TOP</code> and <code>DRAIN_MIN_KW</code> trim the list.</div><button class="shot" data-img="img/power-drain.png" aria-label="Preview of the [DRAIN] screen"><img src="img/power-drain.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[H2]">[H2]</button><div class="what"><b>Hydrogen tanks.</b> Total gauge plus a fill bar per tank.</div><button class="shot" data-img="img/power-h2.png" aria-label="Preview of the [H2] screen"><img src="img/power-h2.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[O2]">[O2]</button><div class="what"><b>Oxygen tanks.</b> Total gauge plus a fill bar per tank.</div><button class="shot" data-img="img/power-o2.png" aria-label="Preview of the [O2] screen"><img src="img/power-o2.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[GAS]">[GAS]</button><div class="what"><b>Gas storage.</b> Hydrogen and oxygen together on one screen.</div><button class="shot" data-img="img/power-gas.png" aria-label="Preview of the [GAS] screen"><img src="img/power-gas.png" alt="" loading="lazy" width="512" height="512"></button></div>
+    </div>
+
+    <div class="group">
+      <h3>Block keywords</h3>
+      <div class="row"><button class="tag" data-copy="[ignore]">[ignore]</button><div class="what">On any block: Power Deck leaves it alone. It isn't switched, counted or listed.</div></div>
+    </div>
+
+    <div class="group">
+      <h3>Arguments</h3>
+      <div class="row"><button class="tag" data-copy="on">on</button><div class="what">Force backups <b>on</b> and keep them on.</div></div>
+      <div class="row"><button class="tag" data-copy="off">off</button><div class="what">Force backups <b>off</b> and keep them off.</div></div>
+      <div class="row"><button class="tag" data-copy="auto">auto</button><div class="what">Back to automatic: backups on at 20%, off at 90% (the <code>LOW</code> and <code>HIGH</code> settings).</div></div>
+    </div>
+
+    <div class="group">
+      <h3>Settings</h3>
+      <p class="note">At the top of the script.</p>
+      <div class="row"><button class="tag alt" data-copy="LOW">LOW / HIGH</button><div class="what">Battery % where backups switch on and off. Default 20 and 90.</div></div>
+      <div class="row"><button class="tag alt" data-copy="CONTROL_HYDROGEN">CONTROL_HYDROGEN</button><div class="what">Switch hydrogen engines with the batteries. <code>CONTROL_REACTORS</code> does the same for reactors.</div></div>
+      <div class="row"><button class="tag alt" data-copy="INCLUDE_DOCKED">INCLUDE_DOCKED</button><div class="what">Also watch and control ships docked on connectors. Off by default, so a docked ship keeps its own screens.</div></div>
+      <div class="row"><button class="tag alt" data-copy="DRAIN_TOP">DRAIN_TOP</button><div class="what">Show only the top N consumers on <code>[DRAIN]</code>. 0 shows everything.</div></div>
+      <div class="row"><button class="tag alt" data-copy="DRAIN_MIN_KW">DRAIN_MIN_KW</button><div class="what">Hide consumers drawing less than this many kW on <code>[DRAIN]</code>. Hidden blocks are summed on the screen.</div></div>
+    </div>
+  </section>
+
+  <!-- ================= SOLAR TRACKER ================= -->
+  <section class="script" id="solar" style="--acc: var(--orange)">
+    <div class="head">
+      <span class="haz" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <h2>DUTC Solar Tracker</h2>
+      <div class="links"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3813959643">Workshop</a></div>
+    </div>
+    <p class="intro">Points your solar panels at the sun with <b>rotors and hinges</b>. One-axis, two-axis and big winged arrays, as many as you like from one PB.</p>
+
+    <div class="group">
+      <h3>Block tags</h3>
+      <div class="row"><button class="tag" data-copy="[SOLAR]">[SOLAR]</button><div class="what">On <b>every rotor and hinge</b> that moves panels. Not on the panels, they're found by themselves. Each tagged base rotor is one array, numbered in name order.</div></div>
+      <div class="row"><button class="tag" data-copy="[ignore]">[ignore]</button><div class="what">On a solar panel: left out of tracking and the totals.</div></div>
+    </div>
+
+    <div class="group">
+      <h3>Screens</h3>
+      <div class="row"><button class="tag" data-copy="[SOLAR]">[SOLAR]</button><div class="what"><b>Tracker overview.</b> Total efficiency and output, one row per array with its state. Shows your battery level when Power Deck runs on the same ship. The PB's own screen shows this too.</div><button class="shot" data-img="img/solar-solar.png" aria-label="Preview of the [SOLAR] screen"><img src="img/solar-solar.png" alt="" loading="lazy" width="512" height="512"></button></div>
+    </div>
+
+    <div class="group">
+      <h3>Arguments</h3>
+      <p class="note">Add an array number to act on one array only: <code>off 2</code>, <code>align 1</code>.</p>
+      <div class="row"><button class="tag" data-copy="align">align</button><div class="what">Realign now.</div></div>
+      <div class="row"><button class="tag" data-copy="off">off</button><div class="what">Stop tracking and lock the rotors.</div></div>
+      <div class="row"><button class="tag" data-copy="on">on</button><div class="what">Resume tracking.</div></div>
+      <div class="row"><button class="tag" data-copy="rescan">rescan</button><div class="what">Reload blocks right away. It also rescans by itself about every 10 seconds.</div></div>
+    </div>
+  </section>
+
+  <!-- ================= BUILD & REPAIR ================= -->
+  <section class="script" id="bar" style="--acc: var(--green)">
+    <div class="head">
+      <span class="haz" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <h2>DUTC Build &amp; Repair</h2>
+      <div class="links"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3789968698">Workshop</a></div>
+    </div>
+    <p class="intro">Companion for the <b>SKO Nanobot Build and Repair System</b> mod (maintained version): sets up new BaR blocks with your settings, queues missing parts and shows weld progress.</p>
+
+    <div class="group">
+      <h3>Screens</h3>
+      <div class="row"><button class="tag" data-copy="[BAR]">[BAR]</button><div class="what"><b>Status overview.</b> State banner, stat tiles, health per BaR system and what auto-queue is doing.</div><button class="shot" data-img="img/bar-status.png" aria-label="Preview of the [BAR] screen"><img src="img/bar-status.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[BAR-PROG]">[BAR-PROG]</button><div class="what"><b>Live weld progress.</b> Active welds pinned on top, bar and % per block, in the order they'll be welded.</div><button class="shot" data-img="img/bar-prog.png" aria-label="Preview of the [BAR-PROG] screen"><img src="img/bar-prog.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[BAR-WELD]">[BAR-WELD]</button><div class="what"><b>Weld targets</b> in work order.</div><button class="shot" data-img="img/bar-weld.png" aria-label="Preview of the [BAR-WELD] screen"><img src="img/bar-weld.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[BAR-GRIND]">[BAR-GRIND]</button><div class="what"><b>Grind targets.</b></div><button class="shot" data-img="img/bar-grind.png" aria-label="Preview of the [BAR-GRIND] screen"><img src="img/bar-grind.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[BAR-MISS]">[BAR-MISS]</button><div class="what"><b>Missing components</b> with amounts, biggest first.</div><button class="shot" data-img="img/bar-miss.png" aria-label="Preview of the [BAR-MISS] screen"><img src="img/bar-miss.png" alt="" loading="lazy" width="512" height="512"></button></div>
+    </div>
+
+    <div class="group">
+      <h3>Block keywords</h3>
+      <div class="row"><button class="tag" data-copy="[BAR-SRC]">[BAR-SRC]</button><div class="what">On one BaR block: the block <code>capture</code> copies its settings from. Without it, the first one found is used.</div></div>
+      <div class="row"><button class="tag" data-copy="[ignore]">[ignore]</button><div class="what">On an assembler or other block the script should leave out.</div></div>
+    </div>
+
+    <div class="group">
+      <h3>Arguments</h3>
+      <div class="row"><button class="tag" data-copy="capture">capture</button><div class="what">Save the settings of a BaR block as your profile (kept in the PB's Custom Data). New BaR blocks get it automatically.</div></div>
+      <div class="row"><button class="tag" data-copy="apply">apply</button><div class="what">Apply the profile to <b>every</b> BaR block now.</div></div>
+      <div class="row"><button class="tag" data-copy="queue">queue</button><div class="what">Turn auto-queuing of missing components on or off.</div></div>
+      <div class="row"><button class="tag" data-copy="asm">asm</button><div class="what">List exactly which assemblers the script found.</div></div>
+      <div class="row"><button class="tag" data-copy="on">on / off</button><div class="what">Switch all BaR systems on or off.</div></div>
+    </div>
+
+    <div class="group">
+      <h3>Settings</h3>
+      <p class="note">At the top of the script.</p>
+      <div class="row"><button class="tag alt" data-copy="GRID_MODE">GRID_MODE</button><div class="what">Which grids it sees: 1 this grid, 2 this ship with rotor and piston parts (default), 3 everything connected, connectors too.</div></div>
+      <div class="row"><button class="tag alt" data-copy="AUTO_QUEUE">AUTO_QUEUE</button><div class="what">Queue missing components automatically. <code>AUTO_SETUP</code> applies the profile to new BaR blocks.</div></div>
+      <div class="row"><button class="tag alt" data-copy="USE_SURVIVAL_KITS">USE_SURVIVAL_KITS</button><div class="what">Let survival kits take queue jobs. Off by default.</div></div>
+      <div class="row"><button class="tag alt" data-copy="ASSEMBLER_GROUP">ASSEMBLER_GROUP</button><div class="what">Only queue to assemblers in this terminal group. Empty uses all of them.</div></div>
+    </div>
+  </section>
+
+  <!-- ================= INVENTORY MANAGER ================= -->
+  <section class="script" id="inventory" style="--acc: var(--blue)">
+    <div class="head">
+      <span class="haz" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <h2>DUTC Inventory Manager</h2>
+      <div class="links">
+        <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3789969690">Workshop</a>
+        <a href="https://github.com/WindingDuke77/dutc-inventory-manager">Source</a>
+      </div>
+    </div>
+    <p class="intro">Sorting, autocrafting, refinery and assembler feeding, ice and uranium balancing. A <b>drop-in replacement for Isy's Inventory Manager</b>: its tags and keywords work unchanged.</p>
+
+    <div class="group">
+      <h3>Screens</h3>
+      <p class="note">No brackets. Cockpit screens: <code>DUTC-main:0</code> is the first screen. Text size per screen: <code>UIScale=0.8</code> in that block's Custom Data.</p>
+      <div class="row"><button class="tag" data-copy="DUTC-main">DUTC-main</button><div class="what"><b>Status overview.</b> Fill bar per container type, machines, queue, warnings and recent actions.</div><button class="shot" data-img="img/inv-main.png" aria-label="Preview of the DUTC-main screen"><img src="img/inv-main.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="DUTC-inv">DUTC-inv</button><div class="what"><b>Item lists</b> with bars. Filters go in the LCD's Custom Data (<code>Component</code>, <code>Ingot</code>, <code>SteelPlate</code>, regex). Long list? Add <code>DUTC-inv 2</code>, <code>DUTC-inv 3</code> with empty Custom Data and it carries on.</div><button class="shot" data-img="img/inv-inv.png" aria-label="Preview of the DUTC-inv screen"><img src="img/inv-inv.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="Autocrafting">Autocrafting</button><div class="what"><b>Crafting status.</b> Wanted amounts live in its Custom Data, prefilled with every craftable item. Several screens: <code>Autocrafting 1</code>, <code>Autocrafting 2</code>.</div><button class="shot" data-img="img/inv-craft.png" aria-label="Preview of the Autocrafting screen"><img src="img/inv-craft.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="DUTC-warn">DUTC-warn</button><div class="what"><b>Warnings,</b> numbered.</div><button class="shot" data-img="img/inv-warn.png" aria-label="Preview of the DUTC-warn screen"><img src="img/inv-warn.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="DUTC-act">DUTC-act</button><div class="what"><b>Action log:</b> every item moved, with a timestamp.</div><button class="shot" data-img="img/inv-act.png" aria-label="Preview of the DUTC-act screen"><img src="img/inv-act.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag alt" data-copy="IIM-main">IIM-main</button><div class="what">Isy's tags still work: <code>IIM-main</code>, <code>IIM-inventory</code> (with <code>@0</code> sections), <code>IIM-warnings</code>, <code>IIM-actions</code>.</div></div>
+    </div>
+
+    <div class="group">
+      <h3>Container names</h3>
+      <p class="note">Put a type word in a cargo container's name and that type gets sorted into it. No container for a type? The biggest free cargo gets tagged by itself.</p>
+      <div class="row"><button class="tag" data-copy="Ores">Ores</button><div class="what">Also <code>Ingots</code>, <code>Components</code>, <code>Tools</code>, <code>Ammo</code>, <code>Bottles</code>, <code>Food</code>. Optional: <code>Ice</code>, <code>Gravel</code>.</div></div>
+    </div>
+
+    <div class="group">
+      <h3>Block keywords</h3>
+      <div class="row"><button class="tag" data-copy="Special">Special</button><div class="what">Loadout container. Amounts go in its Custom Data, with Isy's modes: <code>100</code>, <code>100M</code> (minimum), <code>100L</code> (limit), <code>All</code>.</div></div>
+      <div class="row"><button class="tag" data-copy="Locked">Locked</button><div class="what">The script never touches it.</div></div>
+      <div class="row"><button class="tag" data-copy="Hidden">Hidden</button><div class="what">Not counted, not shown, left out of sorting.</div></div>
+      <div class="row"><button class="tag" data-copy="!manual">!manual</button><div class="what">On a refinery, assembler or other machine: excluded from management.</div></div>
+      <div class="row"><button class="tag" data-copy="[No Sorting]">[No Sorting]</button><div class="what">On a connector: the ship docked there is left alone. <code>[No IIM]</code> does the same.</div></div>
+    </div>
+
+    <div class="group">
+      <h3>Autocrafting lines</h3>
+      <p class="note">One line per item in the Autocrafting screen's Custom Data.</p>
+      <div class="syntax">
+        <div><code>SteelPlate=15000</code><span>Keep 15000 in stock.</span></div>
+        <div><code>SteelPlate=15000P</code><span>Modifiers after the amount: <b>P</b> craft first, <b>I</b> ignore, <b>D</b> disassemble the excess, <b>H</b> hide from the screen.</span></div>
+        <div><code>Item=100 BP:Subtype</code><span>Force a blueprint name for a stubborn modded item (or queue it once by hand and the script learns it).</span></div>
+        <div><code>Ingot/Iron=50000</code><span>Refinery quota: ore feeding stops at the target and starts again below it.</span></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Arguments</h3>
+      <div class="row"><button class="tag" data-copy="pause">pause / resume</button><div class="what">Stop and restart the script.</div></div>
+      <div class="row"><button class="tag" data-copy="reset">reset</button><div class="what">Clear blueprint caches. Run it after adding new assemblers.</div></div>
+      <div class="row"><button class="tag" data-copy="items ">items &lt;text&gt;</button><div class="what">List item ids matching the text, to get exact names for the autocrafting list.</div></div>
+      <div class="row"><button class="tag" data-copy="bp ">bp &lt;name&gt;</button><div class="what">Test a blueprint name and show which assembler types can see it.</div></div>
+      <div class="row"><button class="tag" data-copy="bps">bps</button><div class="what">List every blueprint learned from items you queued by hand.</div></div>
+      <div class="row"><button class="tag" data-copy="unload">unload / load</button><div class="what">On a docked ship's PB: empty its cargo into the other grid, or fill its Specials from it.</div></div>
+    </div>
+  </section>
+
+  <p class="empty" id="empty">Nothing matches that. Try a shorter word.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Scripts by Dutchess77 on the Steam Workshop. Updated November 2026.</span>
+    <a href="https://github.com/WindingDuke77/dutc-scripts">Edit this page on GitHub</a>
+  </div>
+</footer>
+
+<dialog id="lb"><img alt=""><p></p></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var copyIcon = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+  var toast = document.getElementById('toast'), timer;
+  function say(msg) {
+    toast.textContent = msg; toast.classList.add('on');
+    clearTimeout(timer); timer = setTimeout(function () { toast.classList.remove('on'); }, 1400);
+  }
+
+  document.querySelectorAll('.tag').forEach(function (b) {
+    b.insertAdjacentHTML('beforeend', copyIcon);
+    b.title = 'Copy ' + b.dataset.copy.trim();
+    b.addEventListener('click', function () {
+      var text = b.dataset.copy;
+      var done = function () { say('Copied ' + text.trim()); };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, done);
+      else {
+        var t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        t.remove(); done();
+      }
+    });
+  });
+
+  var lb = document.getElementById('lb');
+  document.querySelectorAll('.shot').forEach(function (s) {
+    s.addEventListener('click', function () {
+      lb.querySelector('img').src = s.dataset.img;
+      lb.querySelector('p').textContent = s.getAttribute('aria-label').replace('Preview of the ', '');
+      if (lb.showModal) lb.showModal();
+    });
+  });
+  lb.addEventListener('click', function () { lb.close(); });
+
+  // search: hide every row, note and basics card that doesn't match, then empty groups and sections
+  var q = document.getElementById('q'), empty = document.getElementById('empty');
+  var basics = document.getElementById('basics');
+  var ITEMS = '.row, .syntax > div, .group .note, .basic';
+  var items = Array.prototype.slice.call(document.querySelectorAll(ITEMS));
+  items.forEach(function (r) { r.dataset.text = r.textContent.toLowerCase(); });
+
+  function filter() {
+    var words = q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    var any = false;
+    items.forEach(function (r) {
+      var hit = words.every(function (w) { return r.dataset.text.indexOf(w) >= 0; });
+      r.classList.toggle('hide', !hit);
+    });
+    document.querySelectorAll('.group').forEach(function (g) {
+      var vis = g.querySelectorAll('.row:not(.hide), .syntax > div:not(.hide), .note:not(.hide)').length > 0;
+      g.classList.toggle('hide', !vis);
+    });
+    document.querySelectorAll('section.script').forEach(function (s) {
+      var vis = s.querySelectorAll('.group:not(.hide)').length > 0;
+      s.classList.toggle('hide', !vis);
+      if (vis) any = true;
+    });
+    var basicHit = basics.querySelectorAll('.basic:not(.hide)').length > 0;
+    basics.classList.toggle('hide', !basicHit);
+    if (basicHit) any = true;
+    empty.style.display = any ? 'none' : 'block';
+  }
+  q.addEventListener('input', filter);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+    if (e.key === 'Escape' && document.activeElement === q) { q.value = ''; filter(); }
+  });
+})();
+</script>
+</body>
+</html>
