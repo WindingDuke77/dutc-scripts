@@ -283,6 +283,7 @@ dialog p { margin: 10px 2px 0; font: 600 14px var(--mono); color: var(--dim); }
       <h3>Block tags</h3>
       <div class="row"><button class="tag" data-copy="[SOLAR]">[SOLAR]</button><div class="what">On <b>every rotor and hinge</b> that moves panels. Not on the panels, they're found by themselves. Each tagged base rotor is one array, numbered in name order.</div></div>
       <div class="row"><button class="tag" data-copy="[ignore]">[ignore]</button><div class="what">On a solar panel: left out of tracking and the totals.</div></div>
+      <div class="row"><button class="tag" data-copy="[NIGHT]">[NIGHT]</button><div class="what"><b>Night lights.</b> On any light (or any block with an on/off switch): turns on at sunset, off at sunrise. The brightest solar panel decides, so fixed panels work too, no trackers needed. Only switched at sunset and sunrise, so you can still flip it by hand in between.</div></div>
     </div>
 
     <div class="group">
@@ -297,6 +298,14 @@ dialog p { margin: 10px 2px 0; font: 600 14px var(--mono); color: var(--dim); }
       <div class="row"><button class="tag" data-copy="off">off</button><div class="what">Stop tracking and lock the rotors.</div></div>
       <div class="row"><button class="tag" data-copy="on">on</button><div class="what">Resume tracking.</div></div>
       <div class="row"><button class="tag" data-copy="rescan">rescan</button><div class="what">Reload blocks right away. It also rescans by itself about every 10 seconds.</div></div>
+    </div>
+
+    <div class="group">
+      <h3>Settings</h3>
+      <p class="note">At the top of the script.</p>
+      <div class="row"><button class="tag alt" data-copy="NIGHT_SUN">NIGHT_SUN</button><div class="what">How dark it has to get before <code>[NIGHT]</code> lights go on: % sun on the brightest panel. Default 5.</div></div>
+      <div class="row"><button class="tag alt" data-copy="RECHECK_SECONDS">RECHECK_SECONDS</button><div class="what">How often a locked array looks for a better angle. Default 60.</div></div>
+      <div class="row"><button class="tag alt" data-copy="LOCK_WHEN_IDLE">LOCK_WHEN_IDLE</button><div class="what">Lock the rotors while they hold position. On by default.</div></div>
     </div>
   </section>
 
