@@ -235,7 +235,7 @@ dialog p { margin: 10px 2px 0; font: 600 14px var(--mono); color: var(--dim); }
       <h2>Dutc Power Deck</h2>
       <div class="links"><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3789962197">Workshop</a></div>
     </div>
-    <p class="intro">Battery manager: turns <b>hydrogen engines and reactors on</b> when batteries run low and <b>off</b> again when they're full, plus power and gas screens.</p>
+    <p class="intro">Battery manager: turns <b>hydrogen engines and reactors on</b> when batteries run low and <b>off</b> again when they're full, plus power, gas and docking screens. Tag producers as main, backup or emergency power to control each tier on its own.</p>
 
     <div class="group">
       <h3>Screens</h3>
@@ -245,10 +245,14 @@ dialog p { margin: 10px 2px 0; font: 600 14px var(--mono); color: var(--dim); }
       <div class="row"><button class="tag" data-copy="[H2]">[H2]</button><div class="what"><b>Hydrogen tanks.</b> Total gauge plus a fill bar per tank.</div><button class="shot" data-img="img/power-h2.png" aria-label="Preview of the [H2] screen"><img src="img/power-h2.png" alt="" loading="lazy" width="512" height="512"></button></div>
       <div class="row"><button class="tag" data-copy="[O2]">[O2]</button><div class="what"><b>Oxygen tanks.</b> Total gauge plus a fill bar per tank.</div><button class="shot" data-img="img/power-o2.png" aria-label="Preview of the [O2] screen"><img src="img/power-o2.png" alt="" loading="lazy" width="512" height="512"></button></div>
       <div class="row"><button class="tag" data-copy="[GAS]">[GAS]</button><div class="what"><b>Gas storage.</b> Hydrogen and oxygen together on one screen.</div><button class="shot" data-img="img/power-gas.png" aria-label="Preview of the [GAS] screen"><img src="img/power-gas.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[DOCKED]">[DOCKED]</button><div class="what"><b>Docking list.</b> Every ship docked on a connector: battery %, hydrogen %, charging or draining, and which connector it sits on. A ship docked to a docked ship shows "via" that ship.</div><button class="shot" data-img="img/power-docked.png" aria-label="Preview of the [DOCKED] screen"><img src="img/power-docked.png" alt="" loading="lazy" width="512" height="512"></button></div>
     </div>
 
     <div class="group">
       <h3>Block keywords</h3>
+      <div class="row"><button class="tag" data-copy="[MAIN]">[MAIN]</button><div class="what">On a power producer: <b>main power</b>, kept on. Works on any reactor, engine or modded generator (fusion reactors, TD Power Core...).</div><button class="shot" data-img="img/power-tiers.png" aria-label="Preview of the [BATT] screen with power tiers"><img src="img/power-tiers.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[BACKUP]">[BACKUP]</button><div class="what">On a power producer: <b>backup power</b>, on at 20%, off at 90%. Untagged hydrogen engines and reactors are backups already.</div><button class="shot" data-img="img/power-tierpower.png" aria-label="Preview of the [POWER] screen with power tiers"><img src="img/power-tierpower.png" alt="" loading="lazy" width="512" height="512"></button></div>
+      <div class="row"><button class="tag" data-copy="[EMS]">[EMS]</button><div class="what">On a power producer: <b>emergency power</b>, only on at 5%, off again at 30%.</div></div>
       <div class="row"><button class="tag" data-copy="[ignore]">[ignore]</button><div class="what">On any block: Power Deck leaves it alone. It isn't switched, counted or listed.</div></div>
     </div>
 
@@ -256,14 +260,18 @@ dialog p { margin: 10px 2px 0; font: 600 14px var(--mono); color: var(--dim); }
       <h3>Arguments</h3>
       <div class="row"><button class="tag" data-copy="on">on</button><div class="what">Force backups <b>on</b> and keep them on.</div></div>
       <div class="row"><button class="tag" data-copy="off">off</button><div class="what">Force backups <b>off</b> and keep them off.</div></div>
-      <div class="row"><button class="tag" data-copy="auto">auto</button><div class="what">Back to automatic: backups on at 20%, off at 90% (the <code>LOW</code> and <code>HIGH</code> settings).</div></div>
+      <div class="row"><button class="tag" data-copy="auto">auto</button><div class="what">Every tier back to automatic: main on, backups on at 20% and off at 90%, emergency power on at 5% and off at 30%.</div></div>
+      <div class="row"><button class="tag" data-copy="main off">main on|off|auto</button><div class="what">Switch the <code>[MAIN]</code> tier by hand, or back to automatic. Just <code>main</code> toggles it.</div></div>
+      <div class="row"><button class="tag" data-copy="backup on">backup on|off|auto</button><div class="what">Same for the <code>[BACKUP]</code> tier. Just <code>backup</code> toggles it.</div></div>
+      <div class="row"><button class="tag" data-copy="ems on">ems on|off|auto</button><div class="what">Same for the <code>[EMS]</code> tier. Just <code>ems</code> toggles it. A tier switched by hand shows a * on the screens.</div></div>
     </div>
 
     <div class="group">
       <h3>Settings</h3>
       <p class="note">At the top of the script.</p>
       <div class="row"><button class="tag alt" data-copy="LOW">LOW / HIGH</button><div class="what">Battery % where backups switch on and off. Default 20 and 90.</div></div>
-      <div class="row"><button class="tag alt" data-copy="CONTROL_HYDROGEN">CONTROL_HYDROGEN</button><div class="what">Switch hydrogen engines with the batteries. <code>CONTROL_REACTORS</code> does the same for reactors.</div></div>
+      <div class="row"><button class="tag alt" data-copy="EMS_LOW">EMS_LOW / EMS_HIGH</button><div class="what">Battery % where <code>[EMS]</code> emergency power switches on and off. Default 5 and 30.</div></div>
+      <div class="row"><button class="tag alt" data-copy="CONTROL_HYDROGEN">CONTROL_HYDROGEN</button><div class="what">Treat untagged hydrogen engines as backups. <code>CONTROL_REACTORS</code> does the same for reactors. Tagged blocks are always switched.</div></div>
       <div class="row"><button class="tag alt" data-copy="INCLUDE_DOCKED">INCLUDE_DOCKED</button><div class="what">Also watch and control ships docked on connectors. Off by default, so a docked ship keeps its own screens.</div></div>
       <div class="row"><button class="tag alt" data-copy="DRAIN_TOP">DRAIN_TOP</button><div class="what">Show only the top N consumers on <code>[DRAIN]</code>. 0 shows everything.</div></div>
       <div class="row"><button class="tag alt" data-copy="DRAIN_MIN_KW">DRAIN_MIN_KW</button><div class="what">Hide consumers drawing less than this many kW on <code>[DRAIN]</code>. Hidden blocks are summed on the screen.</div></div>
